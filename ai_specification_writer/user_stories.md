@@ -1,100 +1,85 @@
 BakuFlood AI — User Stories
-Overview
-These user stories describe the main capabilities of BakuFlood AI, an IoT- and AI-assisted flood monitoring and early warning system for Baku. Acceptance criteria define verifiable behavior for an initial product implementation.
-
-Priority definitions: MVP = essential for the first usable release; High = important next capability; Medium = valuable enhancement; Low = optional later improvement.
-User Story 1 — View Flood Risks on a Map
-As a Baku resident, I want to view flood risk levels for monitored streets on an interactive map so that I can avoid potentially dangerous areas.
+User Story 1 — Flood Risk Map
+As a resident, I want to see flood risks on a map so that I can avoid dangerous streets.
 
 Acceptance Criteria:
-- The map displays every configured monitoring location with a low, medium, high, or unavailable risk status.
-- Selecting a location shows its risk level and the timestamp of the latest update.
-- Locations with missing or outdated data are marked as unavailable rather than shown as safe.
+- Each monitored location displays a low, medium, high, or unavailable risk level.
+- Clicking a location shows its risk level and last update time.
 Priority: MVP
-User Story 2 — Collect Water-Level Sensor Data
-As a municipal infrastructure operator, I want to receive measurements from installed IoT water-level sensors so that I can monitor changing water conditions without visiting every site.
+User Story 2 — Sensor Data Collection
+As an infrastructure operator, I want to collect IoT water-level readings so that I can monitor drainage conditions remotely.
 
 Acceptance Criteria:
-- The system accepts a reading only if it identifies a registered sensor and includes a timestamp and water-level value.
-- Valid readings are stored and associated with the correct monitoring location.
-- Invalid readings are rejected and recorded for troubleshooting without changing the displayed water level.
+- Registered sensors can submit timestamped water-level readings.
+- Valid readings are saved; invalid readings are rejected and logged.
 Priority: MVP
-User Story 3 — Integrate Weather Information
-As a flood risk analyst, I want to combine sensor data with rainfall observations and forecasts so that risk assessments account for changing weather conditions.
+User Story 3 — Weather Integration
+As a risk analyst, I want to access rainfall data so that predictions reflect current weather conditions.
 
 Acceptance Criteria:
-- The system retrieves rainfall data from at least one configured meteorological provider.
-- Each weather record includes its source, observation or forecast time, and the area it covers.
-- If weather data is unavailable, the system flags the missing input instead of treating rainfall as zero.
+- The system retrieves rainfall data from a configured weather provider.
+- Weather records include source and timestamp; missing data is flagged.
 Priority: MVP
-User Story 4 — Calculate Area-Specific Flood Risk
-As a municipal infrastructure operator, I want to receive calculated flood risk levels for monitored areas so that I can identify where intervention may be needed.
+User Story 4 — Flood Risk Prediction
+As an infrastructure operator, I want to see calculated flood risks so that I can prioritize threatened locations.
 
 Acceptance Criteria:
-- The risk assessment service uses available sensor and weather inputs to assign a low, medium, or high risk level to each eligible monitoring area.
-- Every calculated risk record stores its location, assessment timestamp, and the data or model version used.
-- When required inputs are insufficient, the service returns an unavailable status and does not present a confident risk classification.
+- Available sensor and weather data produce a low, medium, or high risk level.
+- Each prediction stores location and time; insufficient data produces an unavailable status.
 Priority: MVP
-User Story 5 — Receive High-Risk Alerts
-As an emergency response officer, I want to receive alerts when an area reaches a high flood risk level so that I can coordinate a timely response.
+User Story 5 — Emergency Alerts
+As an emergency officer, I want to receive high-risk alerts so that I can respond quickly.
 
 Acceptance Criteria:
-- A new high-risk event automatically creates an alert containing the location, risk level, and event time.
-- The system sends the alert to the configured responsible authority through at least one operational notification channel.
-- Repeated assessments of the same ongoing event do not generate duplicate new-event alerts.
+- A new high-risk event creates an alert with location and timestamp.
+- The responsible authority is notified; duplicate alerts for the same active event are prevented.
 Priority: MVP
-User Story 6 — Manage and Monitor Active Alerts
-As a municipal operations officer, I want to view and update active flood alerts in a dashboard so that I can coordinate and track responses.
+User Story 6 — Alert Management
+As a municipal officer, I want to manage active alerts so that I can track response progress.
 
 Acceptance Criteria:
-- The dashboard lists active alerts with location, severity, creation time, and current status.
-- An authorized officer can change an alert status to acknowledged or resolved.
-- Each status change is saved with a timestamp and the identity of the officer who made it.
+- The dashboard shows alert location, severity, time, and status.
+- Authorized officers can acknowledge or resolve alerts; changes are logged.
 Priority: MVP
-User Story 7 — Subscribe to Location-Based Notifications
-As a resident, I want to subscribe to flood warnings for selected areas so that I receive relevant alerts without constantly checking the map.
+User Story 7 — Personal Notifications
+As a resident, I want to subscribe to area-based alerts so that I get warnings relevant to my location.
 
 Acceptance Criteria:
-- A user can select one or more monitored areas and explicitly opt in to notifications.
-- A high-risk event in a subscribed area triggers a notification containing the affected location and warning time.
-- A user can unsubscribe, after which no new subscription-based notifications are sent for that area.
+- Users can opt in to warnings for selected monitored areas.
+- High-risk events trigger notifications; unsubscribing stops future alerts.
 Priority: High
-User Story 8 — Monitor Sensor Health
-As a system administrator, I want to identify sensors that stop reporting or send abnormal values so that maintenance teams can restore reliable monitoring.
+User Story 8 — Sensor Health
+As a system administrator, I want to check sensor health so that I can detect monitoring failures.
 
 Acceptance Criteria:
-- A sensor is flagged as offline if it has not reported within its configured reporting timeout.
-- Readings outside a sensor's configured valid range are flagged and excluded from normal risk calculations.
-- The dashboard shows the sensor's health status and the time of its most recent valid reading.
+- Sensors that exceed a configured reporting timeout are marked offline.
+- Out-of-range readings are flagged, and the dashboard shows the last valid reading.
 Priority: High
-User Story 9 — Review Flood History
-As a city planning analyst, I want to review historical water levels, risk estimates, and alerts so that I can identify recurring flood hotspots.
+User Story 9 — Historical Analysis
+As a city analyst, I want to review past flood data so that I can identify recurring problem areas.
 
 Acceptance Criteria:
-- An authorized analyst can filter historical records by monitored location and date range.
-- The results show recorded water levels, risk classifications, and alerts in chronological order.
-- A period with no observations is clearly distinguished from a period with measured low water levels.
+- Authorized users can filter historical readings and alerts by location and date.
+- Results are chronological, and missing data is distinguished from low readings.
 Priority: Medium
-User Story 10 — Export Risk Reports
-As a municipal decision-maker, I want to export flood monitoring reports so that I can share evidence when planning infrastructure improvements.
+User Story 10 — Export Reports
+As a municipal decision-maker, I want to download risk reports so that I can support infrastructure planning.
 
 Acceptance Criteria:
-- An authorized user can select an area and date range for a report.
-- The report contains the selected period, number of alerts, and a summary of available risk observations.
-- The report can be downloaded in CSV format with readable column headers.
+- Users can select a location and time range for a report.
+- The report includes risk observations and alert counts and is downloadable as CSV.
 Priority: Medium
-User Story 11 — Find Safer Routes
-As a driver, I want to see which parts of my planned route intersect high-risk monitored streets so that I can decide whether to change my journey.
+User Story 11 — Safer Routes
+As a driver, I want to identify flood-risk sections of my route so that I can make safer travel decisions.
 
 Acceptance Criteria:
-- A user can enter a starting point and destination and view the suggested route on the map.
-- Route segments intersecting a currently high-risk monitored area are visibly highlighted.
-- The interface explains that risk coverage is limited to monitored areas and does not guarantee that unmarked streets are flood-free.
+- Users can enter a start and destination to display a suggested route.
+- High-risk monitored route sections are highlighted; unmonitored roads are not labeled safe.
 Priority: Medium
-User Story 12 — Submit a Flood Observation
-As a Baku resident, I want to report visible street flooding so that responsible teams can investigate locations that may not have sensors.
+User Story 12 — Report Flooding
+As a resident, I want to report flooding on a street so that authorities can investigate unmonitored areas.
 
-
-Notes
-- Exact risk thresholds, sensor timeouts, notification delivery targets, and prediction accuracy requirements must be defined during technical specification and pilot testing.
-- Alerts are decision-support information and should not be presented as guarantees of safety.
+Acceptance Criteria:
+- Users can submit a location, time, and description of observed flooding.
+- Reports are marked unverified until authorized staff review them.
+Priority: Low
